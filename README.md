@@ -1,2 +1,4 @@
-# memeGenerator
-An Android app that create memes with an image and text on top. The created meme can be shared with other apps.
+# MemeCreator
+
+Um mini app Android para criar memes com imagem e texto por cima.
+O meme criado pode ser compartilhado com outros apps.

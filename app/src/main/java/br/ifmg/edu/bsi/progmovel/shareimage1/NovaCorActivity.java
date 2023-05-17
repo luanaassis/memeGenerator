@@ -1,6 +1,5 @@
 package br.ifmg.edu.bsi.progmovel.shareimage1;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,11 +11,11 @@ public class NovaCorActivity extends AppCompatActivity {
     public static String EXTRA_COR_ATUAL = "br.ifmg.edu.bsi.progmovel.shareimage1.cor_atual";
     public static String EXTRA_NOVA_COR = "br.ifmg.edu.bsi.progmovel.shareimage1.nova_cor";
     private EditText etCor;
-    @SuppressLint("MissingInflatedId")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_novo_texto);
+        setContentView(R.layout.activity_nova_cor);
         etCor = findViewById(R.id.etCor);
         Intent intent = getIntent();
         String corAtual = intent.getStringExtra(EXTRA_COR_ATUAL);

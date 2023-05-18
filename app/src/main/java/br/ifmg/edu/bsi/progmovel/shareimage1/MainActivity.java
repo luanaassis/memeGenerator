@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent intent = result.getData();
                         if (intent != null) {
-                            String novoTamanho = intent.getStringExtra(NovoTextoActivity.EXTRA_NOVO_TEXTO);
+                            float novoTamanho = Float.parseFloat(intent.getStringExtra(NovoTamanhoActivity.EXTRA_NOVO_TAMANHO));
                             memeCreator.setTamanhoFonte(novoTamanho);
                             mostrarImagem();
                         }
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
         Bitmap imagemFundo = BitmapFactory.decodeResource(getResources(), R.drawable.fry_meme);
 
-        memeCreator = new MemeCreator("Olá Android!", Color.WHITE,"64sp", imagemFundo, getResources().getDisplayMetrics());
+        memeCreator = new MemeCreator("Olá Android!", Color.WHITE,64.f, imagemFundo, getResources().getDisplayMetrics());
         mostrarImagem();
     }
 

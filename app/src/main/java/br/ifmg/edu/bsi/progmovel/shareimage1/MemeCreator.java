@@ -13,7 +13,8 @@ import android.util.DisplayMetrics;
  * Você pode controlar o texto, a cor do texto e a imagem de fundo.
  */
 public class MemeCreator {
-    private String texto;
+    private String textoInferior;
+    private String textoSuperior;
     private int corTexto;
     private float tamanhoFonte;
     private Bitmap fundo;
@@ -21,8 +22,9 @@ public class MemeCreator {
     private Bitmap meme;
     private boolean dirty; // se true, significa que o meme precisa ser recriado.
 
-    public MemeCreator(String texto, int corTexto, float tamanhoFonte, Bitmap fundo, DisplayMetrics displayMetrics) {
-        this.texto = texto;
+    public MemeCreator(String textoInferior,String textoSuperior,int corTexto, float tamanhoFonte, Bitmap fundo, DisplayMetrics displayMetrics) {
+        this.textoInferior = textoInferior;
+        this.textoSuperior = textoSuperior;
         this.corTexto = corTexto;
         this.tamanhoFonte = tamanhoFonte;
         this.fundo = fundo;
@@ -31,12 +33,21 @@ public class MemeCreator {
         this.dirty = false;
     }
 
-    public String getTexto() {
-        return texto;
+    public String getTextoInferior() {
+        return textoInferior;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
+    public void setTextoInferior(String textoInferior) {
+        this.textoInferior = textoInferior;
+        dirty = true;
+    }
+
+    public String getTextoSuperior() {
+        return textoSuperior;
+    }
+
+    public void setTextoSuperior(String textoInferior) {
+        this.textoSuperior = textoSuperior;
         dirty = true;
     }
 
@@ -104,10 +115,10 @@ public class MemeCreator {
         paint.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
         paint.setTextAlign(Paint.Align.CENTER);
         // desenhar texto em cima
-        //canvas.drawText(texto, (width / 2.f), (height * 0.15f), paint);
+        canvas.drawText(textoSuperior, (width / 2.f), (height * 0.15f), paint);
 
         // desenhar texto embaixo
-        canvas.drawText(texto, (width / 2.f), (height * 0.9f), paint);
+        canvas.drawText(textoInferior, (width / 2.f), (height * 0.9f), paint);
         return bitmap;
     }
 }

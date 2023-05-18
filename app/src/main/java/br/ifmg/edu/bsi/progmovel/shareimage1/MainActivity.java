@@ -1,7 +1,5 @@
 package br.ifmg.edu.bsi.progmovel.shareimage1;
 
-import static java.awt.font.TextAttribute.FONT;
-
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -46,8 +44,10 @@ public class MainActivity extends AppCompatActivity {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent intent = result.getData();
                         if (intent != null) {
-                            String novoTexto = intent.getStringExtra(NovoTextoActivity.EXTRA_NOVO_TEXTO);
-                            memeCreator.setTexto(novoTexto);
+                            String novoTextoI = intent.getStringExtra(NovoTextoActivity.EXTRA_NOVO_TEXTO_I);
+                            String novoTextoS = intent.getStringExtra(NovoTextoActivity.EXTRA_NOVO_TEXTO_S);
+                            memeCreator.setTextoInferior(novoTextoI);
+                            memeCreator.setTextoSuperior(novoTextoS);
                             mostrarImagem();
                         }
                     }
@@ -122,14 +122,14 @@ public class MainActivity extends AppCompatActivity {
 
         Bitmap imagemFundo = BitmapFactory.decodeResource(getResources(), R.drawable.fry_meme);
 
-        memeCreator = new MemeCreator("Olá Android!", Color.WHITE,64.f, imagemFundo, getResources().getDisplayMetrics());
+        memeCreator = new MemeCreator("Olá Android!", "Deu certo?", Color.WHITE,64.f, imagemFundo, getResources().getDisplayMetrics());
         mostrarImagem();
     }
 
     public void iniciarMudarTexto(View v) {
         Intent intent = new Intent(this, NovoTextoActivity.class);
-        intent.putExtra(NovoTextoActivity.EXTRA_TEXTO_ATUAL, memeCreator.getTexto());
-
+        intent.putExtra(NovoTextoActivity.EXTRA_TEXTO_ATUAL_I, memeCreator.getTextoInferior());
+        intent.putExtra(NovoTextoActivity.EXTRA_TEXTO_ATUAL_S, memeCreator.getTextoSuperior());
         startNovoTexto.launch(intent);
     }
 

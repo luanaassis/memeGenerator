@@ -15,14 +15,16 @@ import android.util.DisplayMetrics;
 public class MemeCreator {
     private String texto;
     private int corTexto;
+    private String tamanhoFonte;
     private Bitmap fundo;
     private DisplayMetrics displayMetrics;
     private Bitmap meme;
     private boolean dirty; // se true, significa que o meme precisa ser recriado.
 
-    public MemeCreator(String texto, int corTexto, Bitmap fundo, DisplayMetrics displayMetrics) {
+    public MemeCreator(String texto, int corTexto, String tamanhoFonte, Bitmap fundo, DisplayMetrics displayMetrics) {
         this.texto = texto;
         this.corTexto = corTexto;
+        this.tamanhoFonte = tamanhoFonte;
         this.fundo = fundo;
         this.displayMetrics = displayMetrics;
         this.meme = criarImagem();
@@ -44,6 +46,15 @@ public class MemeCreator {
 
     public void setCorTexto(int corTexto) {
         this.corTexto = corTexto;
+        dirty = true;
+    }
+
+    public String getTamanhoFonte() {
+        return tamanhoFonte;
+    }
+
+    public void setTamanhoFonte(String tamanhoFonte) {
+        this.tamanhoFonte = tamanhoFonte;
         dirty = true;
     }
 

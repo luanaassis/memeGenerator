@@ -1,5 +1,7 @@
 package br.ifmg.edu.bsi.progmovel.shareimage1;
 
+import static java.awt.font.TextAttribute.FONT;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -70,6 +72,21 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+    private final ActivityResultLauncher<Intent> startNovoTamanho = registerForActivityResult(new StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent intent = result.getData();
+                        if (intent != null) {
+                            String novoTamanho = intent.getStringExtra(NovoTextoActivity.EXTRA_NOVO_TEXTO);
+                            memeCreator.setTamanhoFonte(novoTamanho);
+                            mostrarImagem();
+                        }
+                    }
+                }
+            });
+
     private final ActivityResultLauncher<PickVisualMediaRequest> startImagemFundo = registerForActivityResult(new PickVisualMedia(),
             new ActivityResultCallback<Uri>() {
                 @Override
@@ -105,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
         Bitmap imagemFundo = BitmapFactory.decodeResource(getResources(), R.drawable.fry_meme);
 
-        memeCreator = new MemeCreator("Olá Android!", Color.WHITE, imagemFundo, getResources().getDisplayMetrics());
+        memeCreator = new MemeCreator("Olá Android!", Color.WHITE,"64sp", imagemFundo, getResources().getDisplayMetrics());
         mostrarImagem();
     }
 
@@ -120,6 +137,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NovaCorActivity.class);
         intent.putExtra(NovaCorActivity.EXTRA_COR_ATUAL, converterCor(memeCreator.getCorTexto()));
         startNovaCor.launch(intent);
+    }
+
+    public void iniciarMudarTamanho(View v) {
+        Intent intent = new Intent(this, NovoTamanhoActivity.class);
+        intent.putExtra(NovoTamanhoActivity.EXTRA_TAMANHO_ATUAL, memeCreator.getTamanhoFonte());
+        startNovoTamanho.launch(intent);
     }
 
     public String converterCor(int cor) {

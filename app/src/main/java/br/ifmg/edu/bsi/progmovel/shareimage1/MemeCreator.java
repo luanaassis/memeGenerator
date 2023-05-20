@@ -46,7 +46,7 @@ public class MemeCreator {
         return textoSuperior;
     }
 
-    public void setTextoSuperior(String textoInferior) {
+    public void setTextoSuperior(String textoSuperior) {
         this.textoSuperior = textoSuperior;
         dirty = true;
     }
